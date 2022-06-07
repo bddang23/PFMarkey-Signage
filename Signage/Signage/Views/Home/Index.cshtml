@@ -1,0 +1,20 @@
+﻿@{
+    ViewData["Title"] = "Home Page";
+}
+
+<div class="flexRow" style="justify-content: space-around; flex-wrap:wrap">
+    <a asp-controller="Home" asp-action="FrontLobby" class="ImageContainer" id="FrontLobbyImage" >
+        <img src="~/Images/FrontLobby.PNG" />
+        <div style="font-size:30px "><i>Front Lobby</i></div>
+    </a>
+
+    <a asp-controller="Home" asp-action="CSR" class="ImageContainer" id="CSRImage">
+        <img src="~/Images/CSRArea.PNG" />
+        <div style="font-size:30px"><i>CSR Area</i></div>
+    </a>
+
+    <a asp-controller="Home" asp-action="WareHouse" class="ImageContainer">
+        <img src="~/Images/CSRArea.PNG" />
+        <div style="font-size:30px"><i>Warehouse Area</i></div>
+    </a>
+</div>

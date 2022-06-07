@@ -1,0 +1,110 @@
+﻿@{
+    ViewData["Title"] = "CSR";
+}
+<div class="topFlex">
+    <div class="columnFlex">
+        <div id="salesStats">
+        </div>
+
+        <div id="orderQueue">
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th width="20%"></th>
+                        <th class="text-center"><h1 style="color:green;">Today</h1></th>
+                        <th class="text-center"><h1 style="color:green;">MTD</h1></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr height="25%">
+                        <td class="text-right"><h2 style="color:green;">Bookings</h2></td>
+                        <td class="text-center"><h3>@Model.topInfo.todayModel.bookings</h3></td>
+                        <td class="text-center"><h3>@Model.topInfo.mtdModel.bookings</h3></td>
+                    </tr>
+                    <tr height="25%">
+                        <td class="text-right"><h2 style="color:green;">Sales</h2></td>
+                        <td class="text-center"><h3>@Model.topInfo.todayModel.sales</h3></td>
+                        <td class="text-center"><h3>@Model.topInfo.mtdModel.sales</h3></td>
+                    </tr>
+                    <tr height="25%">
+                        <td class="text-right"><h2 style="color:green;">Goals</h2></td>
+                        <td class="text-center"><h3>@Model.topInfo.todayModel.goal</h3></td>
+                        <td class="text-center"><h3>@Model.topInfo.mtdModel.goal</h3></td>
+                    </tr>
+
+                </tbody>
+            </table>
+        </div>
+    </div>
+    <pre>     </pre>
+    <div class="rowFlex">
+        <div id="OSRInfo">
+            <h2 style="color:green"> MTD OSR Sales</h2>
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>OSR</th>
+                        <th>Sales</th>
+                    </tr>
+                </thead>
+            </table>
+
+            <div class="table-responsive">
+                <table class="table">
+                    <tbody>
+                        @{
+                            if (Model != null)
+                            {
+                                foreach (var Data in Model.topInfo.osrList)
+                                {
+                                    <tr>
+                                        <td>@Data.name</td>
+                                        <td>@String.Format("{0:c}",@Data.sales)</td>
+                                    </tr>
+                                }
+                            }
+                        }
+                    </tbody>
+                </table>
+            </div>
+
+        </div>
+        <pre>  </pre>
+        <div id="CSRInfo">
+            <h2 style="color:green"> MTD CSR Sales</h2>
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th width=40%>CSR</th>
+                        <th width=20%>Bookings</th>
+                        <th width=20%>Lines</th>
+                        <th width=20%>Sales</th>
+                    </tr>
+                </thead>
+            </table>
+
+            <div class="table-responsive">
+                <table class="table">
+                    <tbody>
+                        @{
+                            if (Model != null)
+                            {
+                                foreach (var Data in Model.topInfo.csrList)
+                                {
+                                    <tr>
+                                        <td width=45%>@Data.name</td>
+                                        <td width=20%>@Data.bookingCount</td>
+                                        <td width=20%>@Data.lineCount</td>
+                                        <td width=20%>@String.Format("{0:c}",@Data.sales)</td>
+                                    </tr>
+                                }
+                            }
+                        }
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+
+@Html.Partial("_Bottom")

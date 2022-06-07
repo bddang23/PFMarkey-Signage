@@ -1,0 +1,75 @@
+﻿@{
+    ViewData["Title"] = "Front Lobby";
+}
+<div class="topFlex">
+    <video autoplay width="800" height="450" id="video" muted>
+        <source class="active" src="~/Videos/PF Mobile Showroom - A_C.mp4" />
+        <source src="~/Videos/pfmarkeyvideo.mp4" type="video/mp4" />
+    </video>
+    <script>
+        var myVid = document.getElementById('video');
+
+        //Switches the video over when one has stopped
+        myVid.addEventListener('ended', function(e) {
+            var activeSource = document.querySelector("#video source.active");
+            var nextSource = document.querySelector("#video source.active + source") || document.querySelector("#video source:first-child");
+
+            activeSource.className = "";
+            nextSource.className = "active";
+
+            myVid.src = nextSource.src;
+            myVid.play();
+        });</script>
+
+    <div class="frontColumnFlex">
+        <div id="WelcomeMessage" class="SubViewHead Centered" style="font-weight: bold;">
+            Welcome to PF Markey!
+        </div>
+
+        <div class="rowFlex">
+            <div class="columnFlex">
+                <div id="LastYearTotalSave">
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th>
+                                    <h2 style="color:green; "> Total Cost Savings Last Year - @DateTime.Now.AddYears(-1).Year</h2>
+                                </th>
+
+                                <th>
+                                    <h2 id="num" data-value="$ @Model.topInfo.totalLastYearCostSave" style="color:darkgreen; "></h2>
+                                </th>
+                            </tr>
+
+                        </thead>
+                    </table>
+                </div>
+
+                <div id="contain">
+                    <div id="LastYearTopVendors" class="table-responsive">
+                        <table class="table">
+                            <tbody>
+                                @{
+                                    if (Model != null)
+                                    {
+                                        foreach (var Data in Model.topInfo.vcsList)
+                                        {
+                                                    <tr>
+                                                        <td><h5>@Data.VendorName</h5></td>
+                                                        <td style="white-space:nowrap; font-size:large">@String.Format("{0:c}",@Data.CostSaved)</td>
+                                                    </tr>
+                                        }
+                                    }
+                                }
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+    </div>
+</div>
+@Html.Partial("_Bottom")
+<script src="~/js/NumberAnimation.js"></script>
